@@ -11,36 +11,29 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 
 @Test(enabled=true)
-public class ExtractAllRegexMatchesTest {
+public class ExtractOneRegexMatchTest {
 
-    ExtractAllRegexMatches command = new ExtractAllRegexMatches();
+    ExtractOneRegexMatch command = new ExtractOneRegexMatch();
 
     @DataProvider(name = "data")
     public Object[][] dataTobeTested(){
 
         return new Object[][]{
-                {" ([a-z]{4}) ","hello my name is bren yo",""}
+                {" ([a-z]{4}) ","hello my name is bren yo",1," bren "},
+                {" ([a-z]{4}) ","hello my name is bren yo",0," name "},
+                {" ([a-z]{4}) ","n 1 2 3 4 5",0,""}
 
         };
     }
 
     @Test(dataProvider = "data")
-    public void aTests(String RegexPattern, String InputText, String Results){
-        ListValue<String> d = command.action(RegexPattern,InputText);
+    public void aTests(String RegexPattern, String InputText, double MatchNumber, String Results){
+        Value<String> d = command.action(RegexPattern,MatchNumber,InputText);
+        String output = (String)d.get();
+        //System.out.println("Debug:"+output);
+        assertEquals(output,Results);
 
-        //List<Value> myList = output.get();
-        List<Value> myList = d.get();
-        assertEquals(myList.size(),2);
-        ArrayList<String> ExpectedRes = new ArrayList<String>();
-        ExpectedRes.add(" name ");ExpectedRes.add(" bren ");
 
-        ArrayList<String> ActualRes = new ArrayList<String>();
-        for(int i=0;i<myList.size();i++){
-            //System.out.println("Debug:"+myList.get(i));
-            String s = myList.get(i).toString();
-            ActualRes.add(s);
-        }
-        assertEquals(ActualRes,ExpectedRes);
 
 
 

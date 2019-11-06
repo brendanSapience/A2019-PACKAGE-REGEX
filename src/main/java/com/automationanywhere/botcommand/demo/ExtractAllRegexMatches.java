@@ -14,7 +14,6 @@ package com.automationanywhere.botcommand.demo;
 import com.automationanywhere.botcommand.data.Value;
 import com.automationanywhere.botcommand.data.impl.ListValue;
 import com.automationanywhere.botcommand.data.impl.StringValue;
-import com.automationanywhere.botcommand.exception.BotCommandException;
 import com.automationanywhere.commandsdk.annotations.*;
 import com.automationanywhere.commandsdk.annotations.rules.NotEmpty;
 import com.automationanywhere.commandsdk.i18n.Messages;
@@ -27,6 +26,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 import static com.automationanywhere.commandsdk.model.DataType.STRING;
 
 /**
@@ -34,24 +34,20 @@ import static com.automationanywhere.commandsdk.model.DataType.STRING;
  *
  */
 @BotCommand
-@CommandPkg(label="Extract a Regex Match", name="Extract a Regex Match", description="Extract a Regex Match", icon="pkg.svg",
-		node_label="Extract a Regex Match",
-		return_type= STRING, return_label="Assign the output to variable", return_required=true)
+@CommandPkg(label="Extract All Regex Matches", name="Extract All Regex Matches", description="Extract All Regex Matches", icon="pkg.svg",
+		node_label="Extract All Regex Matches",
+		return_type= DataType.LIST, return_label="Assign the output to variable", return_required=true)
 
-public class ExtractOneRegexMatch {
+public class ExtractAllRegexMatches {
 
 	private static final Messages MESSAGES = MessagesFactory.getMessages("com.automationanywhere.botcommand.demo.messages");
 
 	@Execute
-	public Value<String> action(
+	public com.automationanywhere.botcommand.data.impl.ListValue<String> action(
 			@Idx(index = "1", type = AttributeType.TEXT) @Pkg(label = "Regex Pattern with Matches", default_value_type = STRING) @NotEmpty String RegexExp,
-			@Idx(index = "2", type = AttributeType.NUMBER) @Pkg(label = "Match Number to Extract", default_value_type = DataType.NUMBER) @NotEmpty Double MatchNumber,
-			@Idx(index = "3", type = AttributeType.TEXT) @Pkg(label = "Input Text", default_value_type = STRING) @NotEmpty String TheText
+			@Idx(index = "2", type = AttributeType.TEXT) @Pkg(label = "Input Text", default_value_type = STRING) @NotEmpty String TheText
 			)
 	{
-		if("".equals(String.valueOf(MatchNumber))) {throw new BotCommandException(MESSAGES.getString("emptyInputString", "MatchNumber"));}
-		if("".equals(RegexExp)) {throw new BotCommandException(MESSAGES.getString("emptyInputString", "RegularExpression"));}
-		if("".equals(TheText)) {throw new BotCommandException(MESSAGES.getString("emptyInputString", "InputText"));}
 
 		List<String> allMatches = new ArrayList<String>();
 		Matcher m = Pattern.compile(RegexExp).matcher(TheText);
@@ -59,13 +55,19 @@ public class ExtractOneRegexMatch {
 			allMatches.add(m.group());
 		}
 
-		if(allMatches.size() > MatchNumber){
-			return new StringValue(allMatches.get(MatchNumber.intValue()));
-		}else{
-			return new StringValue("");
+		//System.out.println("DEBUG:"+allMatches.size());
+		ListValue<String> FinalList = new ListValue<String>();
+		List<Value> ContainerList = new ArrayList<Value>();
+
+		for(int i = 0;i < allMatches.size();i++){
+			Value v = new StringValue(allMatches.get(i));
+			ContainerList.add(v);
 		}
 
+		FinalList.set(ContainerList);
 
+		return FinalList;
+		//return new StringValue(v);
 
 	}
 

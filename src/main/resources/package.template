@@ -1,0 +1,10 @@
+{
+  "name": "REGEX Tools",
+  "label": "REGEX Tools",
+  "description": "Provides REGEX Actions.",
+  "group": "",
+  "artifactName": "",
+  "packageVersion": "",
+  "codeVersion": "",
+  "commands": []
+}
