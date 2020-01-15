@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.automationanywhere.botcommand.demo.ExtractOneRegexMatchTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-11-05T15:29:33" hostname="EC2AMAZ-4PFQG1I" time="0.001">
+  <properties/>
+  <testcase name="aTests[0]( ([a-z]{4}) , hello my name is bren yo, 1,  bren )" classname="com.automationanywhere.botcommand.demo.ExtractOneRegexMatchTest" time="0.001"/>
+  <testcase name="aTests[1]( ([a-z]{4}) , hello my name is bren yo, 0,  name )" classname="com.automationanywhere.botcommand.demo.ExtractOneRegexMatchTest" time="0.0"/>
+  <testcase name="aTests[2]( ([a-z]{4}) , n 1 2 3 4 5, 0, )" classname="com.automationanywhere.botcommand.demo.ExtractOneRegexMatchTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

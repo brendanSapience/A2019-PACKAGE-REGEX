@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.automationanywhere.botcommand.demo.ExtractAllRegexMatchesTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-05T15:29:33" hostname="EC2AMAZ-4PFQG1I" time="0.006">
+  <properties/>
+  <testcase name="aTests[0]( ([a-z]{4}) , hello my name is bren yo, )" classname="com.automationanywhere.botcommand.demo.ExtractAllRegexMatchesTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
